@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction</title>
+    <!-- Adding Google Fonts for better typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Adding some CSS for styling -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            font-size: 24px;
+        }
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .symptom-checkbox {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        .submit-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #333;
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Layout for wrapping symptoms in rows (max 8 per row) */
+        .symptoms-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .symptom-checkbox {
+            display: inline-block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .symptoms-list {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Disease Prediction Using Symptoms
+</header>
+
+<div class="container">
+    <h1>Disease Prediction Based on Symptoms</h1>
+    
+    <!-- Form for symptoms selection -->
+    <form action="/predict" method="POST">
+        <label for="symptoms">Select Symptoms:</label>
+        <div class="symptoms-list">
+            {% for symptom in symptoms %}
+                <label class="symptom-checkbox">
+                    <input type="checkbox" name="symptoms" value="{{ symptom }}"> {{ symptom }}
+                </label>
+            {% endfor %}
+        </div>
+        <br>
+        <input type="submit" value="Predict" class="submit-btn">
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            <h2>Predicted Disease: <span style="color: #007bff;">{{ prediction }}</span></h2>
+        </div>
+    {% endif %}
+</div>
+
+<footer>
+    &copy; 2025 Disease Prediction. All Rights Reserved.
+</footer>
+
+</body>
+</html>
